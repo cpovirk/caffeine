@@ -68,6 +68,8 @@ dependencies {
   javaPoetImplementation libraries.javapoet
   javaPoetImplementation libraries.commonsLang3
   javaPoetImplementation libraries.googleJavaFormat
+
+  api "org.jspecify:jspecify:0.2.0"
 }
 
 tasks.named('compileCodeGenJava').configure {
