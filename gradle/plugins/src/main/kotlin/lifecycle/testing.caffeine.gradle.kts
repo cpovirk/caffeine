@@ -9,7 +9,7 @@ plugins {
   id("errorprone.caffeine")
 }
 
-//val mockitoAgent: Configuration by configurations.creating
+val mockitoAgent: Configuration by configurations.creating
 
 dependencies {
   testImplementation(libs.truth)
@@ -21,9 +21,9 @@ dependencies {
 
   testRuntimeOnly(libs.junit5.launcher)
 
-//  mockitoAgent(libs.mockito) {
-//    isTransitive = false
-//  }
+  mockitoAgent(libs.mockito) {
+    isTransitive = false
+  }
 }
 
 tasks.withType<Test>().configureEach {
@@ -31,7 +31,7 @@ tasks.withType<Test>().configureEach {
 
   // Use --debug-jvm to remotely attach to the test task
   jvmArgs("-XX:SoftRefLRUPolicyMSPerMB=0", "-XX:+EnableDynamicAgentLoading", "-Xshare:off")
-//  jvmArgs("-javaagent:${mockitoAgent.asPath}")
+  jvmArgs("-javaagent:${mockitoAgent.asPath}")
   jvmArgs(defaultJvmArgs())
   if (isCI()) {
     reports.junitXml.includeSystemOutLog = false
